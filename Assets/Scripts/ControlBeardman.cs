@@ -5,18 +5,22 @@ public class ControlBeardman : MonoBehaviour {
 	public float maxSpeed = 7f;
 
 	private Animator anim;
+	private Attack attack;
 
 	// Use this for initialization
 	void Awake () {
 		anim = GetComponent<Animator>();
+		attack = GetComponent<Attack>();
 	}
 	
 	// Update is called once per frame
 	void Update () {
 		if (Input.GetButtonDown("Fire1")) {
 			anim.SetTrigger("Punch");
+			attack.punch();
 		} else if (Input.GetButtonDown("Fire2")) {
 			anim.SetTrigger("Kick");
+			attack.kick();
 		}
 	}
 

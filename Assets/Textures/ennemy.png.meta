@@ -1,17 +1,19 @@
 fileFormatVersion: 2
-guid: 5850f5d932d237d48bb4eb98dc47ec79
+guid: 01d09703884f34e46b8704fd2d91e6cf
 TextureImporter:
   fileIDToRecycleName:
-    21300000: stickman_0
-    21300002: stickman_1
-    21300004: stickman_2
-    21300006: stickman_3
-    21300008: stickman_4
-    21300010: stickman_5
-    21300012: stickman_6
-    21300014: stickman_7
-    21300016: stickman_8
-    21300018: stickman_9
+    21300000: ennemy_0
+    21300002: ennemy_1
+    21300004: ennemy_2
+    21300006: ennemy_3
+    21300008: ennemy_4
+    21300010: ennemy_5
+    21300012: ennemy_6
+    21300014: ennemy_7
+    21300016: ennemy_8
+    21300018: ennemy_9
+    21300020: ennemy_10
+    21300022: ennemy_11
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -53,7 +55,7 @@ TextureImporter:
   buildTargetSettings: []
   spriteSheet:
     sprites:
-    - name: stickman_0
+    - name: ennemy_0
       rect:
         serializedVersion: 2
         x: 0
@@ -63,7 +65,7 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: stickman_1
+    - name: ennemy_1
       rect:
         serializedVersion: 2
         x: 0
@@ -73,7 +75,7 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: stickman_2
+    - name: ennemy_2
       rect:
         serializedVersion: 2
         x: 0
@@ -83,7 +85,7 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: stickman_3
+    - name: ennemy_3
       rect:
         serializedVersion: 2
         x: 0
@@ -93,7 +95,7 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: stickman_4
+    - name: ennemy_4
       rect:
         serializedVersion: 2
         x: 0
@@ -103,7 +105,7 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: stickman_5
+    - name: ennemy_5
       rect:
         serializedVersion: 2
         x: 0
@@ -113,7 +115,7 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: stickman_6
+    - name: ennemy_6
       rect:
         serializedVersion: 2
         x: 0
@@ -123,7 +125,7 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: stickman_7
+    - name: ennemy_7
       rect:
         serializedVersion: 2
         x: 0
@@ -133,7 +135,7 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: stickman_8
+    - name: ennemy_8
       rect:
         serializedVersion: 2
         x: 0
@@ -143,11 +145,31 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: stickman_9
+    - name: ennemy_9
       rect:
         serializedVersion: 2
         x: 0
         y: 64
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: ennemy_10
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 32
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: ennemy_11
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
         width: 32
         height: 32
       alignment: 0
