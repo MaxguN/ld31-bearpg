@@ -4,9 +4,15 @@ using System.Collections;
 public class Health : MonoBehaviour {
 	public float hitPoints = 100;
 
+	private Animator anim;
+	private Beardman beardman;
+	private AI ai;
+
 	// Use this for initialization
 	void Start () {
-	
+		anim = GetComponent<Animator>();
+		beardman = GetComponent<Beardman>();
+		ai = GetComponent<AI>();
 	}
 	
 	// Update is called once per frame
@@ -24,6 +30,12 @@ public class Health : MonoBehaviour {
 	}
 
 	private void kill() {
-		Destroy(gameObject);
+		anim.SetTrigger("KO");
+
+		if (ai) {
+			ai.kill();
+		} else if (beardman) {
+			beardman.kill();
+		}
 	}
 }

@@ -14,7 +14,11 @@ public class Beardman : MonoBehaviour {
 	
 	}
 
+	public void kill() {
+		// endgame
+	}
+
 	public void gainXP(float amount) {
-		
+
 	}
 }
