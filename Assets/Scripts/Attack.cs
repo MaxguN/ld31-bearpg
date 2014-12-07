@@ -37,7 +37,7 @@ public class Attack : MonoBehaviour {
 		kicking = null;
 
 		if (beardman) {
-			beardman.gainXP(100);
+			beardman.kill();
 		}
 	}
 

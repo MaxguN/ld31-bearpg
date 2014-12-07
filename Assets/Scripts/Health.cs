@@ -8,6 +8,12 @@ public class Health : MonoBehaviour {
 	private Beardman beardman;
 	private AI ai;
 
+	private float health;
+
+	void Awake () {
+		health = hitPoints;
+	}
+
 	// Use this for initialization
 	void Start () {
 		anim = GetComponent<Animator>();
@@ -20,10 +26,22 @@ public class Health : MonoBehaviour {
 	
 	}
 
-	public void hit(float damage, Attack hitter) {
-		hitPoints -= damage;
+	public float getHealth() {
+		return health;
+	}
 
-		if (hitPoints <= 0) {
+	public float getMaxHealth() {
+		return hitPoints;
+	}
+
+	public void hit(float damage, Attack hitter) {
+		health -= damage;
+
+		if (beardman) {
+			beardman.updateHealth(health);
+		}
+
+		if (health <= 0) {
 			hitter.kill();
 			kill();
 		}
@@ -33,9 +51,9 @@ public class Health : MonoBehaviour {
 		anim.SetTrigger("KO");
 
 		if (ai) {
-			ai.kill();
+			ai.die();
 		} else if (beardman) {
-			beardman.kill();
+			beardman.die();
 		}
 	}
 }

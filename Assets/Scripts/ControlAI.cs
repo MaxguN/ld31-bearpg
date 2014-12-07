@@ -12,7 +12,12 @@ public class ControlAI : MonoBehaviour {
 	void Awake () {
 		anim = GetComponent<Animator>();
 		ai = GetComponent<AI>();
-		transform.localScale = new Vector3(side, 1, 1);
+
+		setSide(side);
+	}
+
+	void Update() {
+		
 	}
 	
 	// Update is called once per frame
@@ -20,6 +25,13 @@ public class ControlAI : MonoBehaviour {
 		if (ai.isAlive()) {
 			anim.SetBool("Walk", true);
 			rigidbody2D.velocity = new Vector2(side * maxSpeed, 0);
+		} else if (ai.isConveyed()) {
+			rigidbody2D.velocity = new Vector2(side * maxSpeed, 0);
 		}
+	}
+
+	public void setSide(int value) {
+		side = value;
+		transform.localScale = new Vector3(side, 1, 1);
 	}
 }
