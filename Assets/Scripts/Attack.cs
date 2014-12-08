@@ -50,7 +50,7 @@ public class Attack : MonoBehaviour {
 	}
 
 	public void superKick() {
-		foreach (Collider2D target in superKicking) {
+		foreach (GameObject target in superKicking) {
 			target.GetComponent<Health>().hit(kickDamage, this);
 		}
 	}
@@ -69,7 +69,9 @@ public class Attack : MonoBehaviour {
 		ultraKicking.Remove(corpse);
 
 		if (beardman) {
-			beardman.kill(hp, energy, xp);
+			if (corpse.GetComponent<AI>().isAlive()) {
+				beardman.kill(hp, energy, xp);
+			}
 		}
 	}
 

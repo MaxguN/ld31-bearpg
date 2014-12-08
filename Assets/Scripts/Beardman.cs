@@ -2,6 +2,9 @@
 using System.Collections;
 
 public class Beardman : MonoBehaviour {
+	private GameManager gm;
+	private Score score;
+
 	private Health healthScript;
 	private Energy energyScript;
 	private Level levelScript;
@@ -19,6 +22,9 @@ public class Beardman : MonoBehaviour {
 
 	// Use this for initialization
 	void Awake () {
+		gm = GameObject.FindWithTag("Scripts").GetComponent<GameManager>();
+		score = GameObject.FindWithTag("Score").GetComponent<Score>();
+
 		health = GameObject.FindWithTag("Health").transform;
 		energy = GameObject.FindWithTag("Energy").transform;
 		level = GameObject.FindWithTag("Level").transform;
@@ -113,9 +119,10 @@ public class Beardman : MonoBehaviour {
 		healthScript.gainHealth(hp);
 		energyScript.gainEnergy(en);
 		levelScript.gainExperience(xp);
+		score.addScore(1000);
 	}
 
 	public void die() {
-		// endgame
+		gm.gameover();
 	}
 }
