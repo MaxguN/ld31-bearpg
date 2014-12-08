@@ -16,6 +16,6 @@ public class Conveyor : MonoBehaviour {
 	}
 
 	void OnTriggerEnter2D(Collider2D corpse) {
-		Debug.Log(corpse);
+
 	}
 }

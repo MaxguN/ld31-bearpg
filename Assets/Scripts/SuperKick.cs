@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Kick : MonoBehaviour {
+public class SuperKick : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
@@ -14,10 +14,10 @@ public class Kick : MonoBehaviour {
 	}
 
 	void OnTriggerEnter2D(Collider2D target) {
-		transform.parent.GetComponent<Attack>().kickEnter(target);
+		transform.parent.GetComponent<Attack>().superKickEnter(target);
 	}
 
 	void OnTriggerExit2D(Collider2D target) {
-		transform.parent.GetComponent<Attack>().kickLeave(target);
+		transform.parent.GetComponent<Attack>().superKickLeave(target);
 	}
 }

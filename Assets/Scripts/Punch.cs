@@ -18,6 +18,6 @@ public class Punch : MonoBehaviour {
 	}
 
 	void OnTriggerExit2D(Collider2D target) {
-		transform.parent.GetComponent<Attack>().punchLeave();
+		transform.parent.GetComponent<Attack>().punchLeave(target);
 	}
 }

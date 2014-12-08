@@ -14,6 +14,9 @@ public class Beardman : MonoBehaviour {
 	private float maxEnergyWidth;
 	private float maxExperienceWidth;
 
+	private int healthUpgrades = 1;
+	private int energyUpgrades = 1;
+
 	// Use this for initialization
 	void Awake () {
 		health = GameObject.FindWithTag("Health").transform;
@@ -40,11 +43,45 @@ public class Beardman : MonoBehaviour {
 
 	}
 
+	public void upgradeHealth() {
+		healthScript.increaseHealth();
+		healthUpgrades += 1;
+
+		float posX = health.GetChild(1).localPosition.x + (health.GetChild(1).renderer.bounds.size.x / (healthUpgrades - 1)) / 2;
+
+		health.GetChild(1).localPosition = new Vector3(posX, 0, 0.1f);
+		health.GetChild(1).localScale = new Vector3(healthUpgrades, 1, 1);
+
+		//maxHealthWidth = maxEnergyWidth * healthUpgrades / (healthUpgrades - 1);
+	}
+
+	public void upgradeEnergy() {
+		energyScript.increaseEnergy();
+		energyUpgrades += 1;
+
+		float posX = energy.GetChild(1).localPosition.x + (energy.GetChild(1).renderer.bounds.size.x / (energyUpgrades - 1)) / 2;
+
+		energy.GetChild(1).localPosition = new Vector3(posX, 0, 0.1f);
+		energy.GetChild(1).localScale = new Vector3(energyUpgrades, 1, 1);
+	}
+
+	public void unlockSuperPunch() {
+		GetComponent<ControlBeardman>().unlockSuperPunch();
+	}
+
+	public void unlockSuperKick() {
+		GetComponent<ControlBeardman>().unlockSuperKick();
+	}
+
+	public void unlockUltraKick() {
+		GetComponent<ControlBeardman>().unlockUltraKick();
+	}
+
 	public void updateHealth(float hp) {
 		float maxHealth = healthScript.getMaxHealth();
 
-		float scaleX = hp / maxHealth;
-		float posX = -maxHealthWidth * (1 - scaleX) / 2;
+		float scaleX = healthUpgrades * hp / maxHealth;
+		float posX = (healthUpgrades - 1) * maxHealthWidth / 2 - maxHealthWidth * (healthUpgrades - scaleX) / 2;
 
 		health.GetChild(0).localPosition = new Vector3(posX, 0, 0);
 		health.GetChild(0).localScale = new Vector3(scaleX, 1, 1);
@@ -53,8 +90,8 @@ public class Beardman : MonoBehaviour {
 	public void updateEnergy(float en) {
 		float maxEnergy = energyScript.getMaxEnergy();
 
-		float scaleX = en / maxEnergy;
-		float posX = -maxEnergyWidth * (1 - scaleX) / 2;
+		float scaleX = energyUpgrades * en / maxEnergy;
+		float posX = (energyUpgrades - 1) * maxEnergyWidth / 2 - maxEnergyWidth * (energyUpgrades - scaleX) / 2;
 
 		energy.GetChild(0).localPosition = new Vector3(posX, 0, 0);
 		energy.GetChild(0).localScale = new Vector3(scaleX, 1, 1);
@@ -72,9 +109,10 @@ public class Beardman : MonoBehaviour {
 		level.GetChild(0).GetChild(0).localScale = new Vector3(scaleX, 1, 1);
 	}
 
-	public void kill() {
-		levelScript.gainExperience(100);
-
+	public void kill(float hp, float en, float xp) {
+		healthScript.gainHealth(hp);
+		energyScript.gainEnergy(en);
+		levelScript.gainExperience(xp);
 	}
 
 	public void die() {

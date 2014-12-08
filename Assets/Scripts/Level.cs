@@ -28,12 +28,43 @@ public class Level : MonoBehaviour {
 		experience += xp;
 
 		if (experience > nextLevel) {
-			experience -= nextLevel;
-			nextLevel *= 2;
-			level += 1;
+			levelUp();
 		}
 
 		beardman.updateLevel(level, experience);
+	}
+
+	private void levelUp() {
+		experience -= nextLevel;
+		nextLevel *= 2;
+		level += 1;
+
+		// Temp autoselect upgrades
+		switch (level) {
+			case 2 :
+				beardman.upgradeHealth();
+				break;
+			case 3 :
+				beardman.unlockSuperPunch();
+				break;
+			case 4 :
+				beardman.upgradeEnergy();
+				break;
+			case 5 :
+				beardman.unlockSuperKick();
+				break;
+			case 6 :
+				beardman.upgradeHealth();
+				break;
+			case 7 :
+				beardman.unlockUltraKick();
+				break;
+			case 8 :
+				beardman.upgradeEnergy();
+				break;
+			default:
+				break;
+		}
 	}
 
 	public int getLevel() {

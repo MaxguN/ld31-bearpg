@@ -38,10 +38,6 @@ public class Machine : MonoBehaviour {
 			liveBody.position = new Vector3(transform.position.x, -1, 0);
 			liveBody.GetComponent<ControlAI>().setSide(side);
 
-			if (Random.value < 0.1f) {
-				backlog += 1;
-			}
-
 			backlog -= 1;
 		}
 	}
@@ -54,5 +50,9 @@ public class Machine : MonoBehaviour {
 		}
 
 		backlog += 1;
+
+		if (Random.value < 0.1f) {
+			backlog += 1;
+		}
 	}
 }
