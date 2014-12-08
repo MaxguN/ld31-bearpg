@@ -146,16 +146,22 @@ public class ControlBeardman : MonoBehaviour {
 				attack.kick();
 				break;
 			case "Super Punch" :
-				anim.SetTrigger("SuperPunch");
-				attack.superPunch();
+				if (GetComponent<Beardman>().useEnergy(25)) {
+					anim.SetTrigger("SuperPunch");
+					attack.superPunch();
+				}
 				break;
 			case "Super Kick" :
-				anim.SetTrigger("SuperKick");
-				attack.superKick();
+				if (GetComponent<Beardman>().useEnergy(25)) {
+					anim.SetTrigger("SuperKick");
+					attack.superKick();
+				}
 				break;
 			case "Ultra Kick" :
-				anim.SetTrigger("UltraKick");
-				attack.ultraKick();
+				if (GetComponent<Beardman>().useEnergy(150)) {
+					anim.SetTrigger("UltraKick");
+					attack.ultraKick();
+				}
 				break;
 			default :
 				break;

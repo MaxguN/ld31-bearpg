@@ -44,19 +44,37 @@ public class Attack : MonoBehaviour {
 	}
 
 	public void superPunch() {
+		ArrayList killing = new ArrayList();
+
 		foreach (GameObject target in superPunching) {
+			killing.Add(target);
+		}
+
+		foreach (GameObject target in killing) {
 			target.GetComponent<Health>().hit(punchDamage, this);
 		}
 	}
 
 	public void superKick() {
+		ArrayList killing = new ArrayList();
+
 		foreach (GameObject target in superKicking) {
+			killing.Add(target);
+		}
+
+		foreach (GameObject target in killing) {
 			target.GetComponent<Health>().hit(kickDamage, this);
 		}
 	}
 
 	public void ultraKick() {
+		ArrayList killing = new ArrayList();
+
 		foreach (GameObject target in ultraKicking) {
+			killing.Add(target);
+		}
+
+		foreach (GameObject target in killing) {
 			target.GetComponent<Health>().hit(kickDamage, this);
 		}
 	}

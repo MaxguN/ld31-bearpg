@@ -35,6 +35,16 @@ public class Energy : MonoBehaviour {
 		beardman.updateEnergy(energy);
 	}
 
+	public bool useEnergy(float en) {
+		if (en <= energy) {
+			energy -= en;
+			beardman.updateEnergy(energy);
+			return true;
+		}
+
+		return false;
+	}
+
 	public void increaseEnergy() {
 		maxEnergy += baseEnergy;
 	}
