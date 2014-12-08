@@ -22,9 +22,11 @@ public class GameManager : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		if (Input.GetButtonDown("Submit")) {
-			if (state == "start") {// || state == "end") {
+			if (state == "start") {
 				startscreen.renderer.enabled = false;
 				state = "game";
+			} else if (state == "end") {
+				Application.LoadLevel(0);
 			}
 		}
 	}
