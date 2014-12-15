@@ -45,6 +45,10 @@ public class Energy : MonoBehaviour {
 		return false;
 	}
 
+	public bool hasEnergy(float en) {
+		return en <= energy;
+	}
+
 	public void increaseEnergy() {
 		maxEnergy += baseEnergy;
 	}

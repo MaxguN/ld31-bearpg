@@ -34,9 +34,11 @@ public class ControlBeardman : MonoBehaviour {
 				} else {
 					if (Input.GetButtonDown("Fire1")) {
 						actions.Add("Fire1");
+						checkAction();
 						timer = comboTimeout;
 					} else if (Input.GetButtonDown("Fire2")) {
 						actions.Add("Fire2");
+						checkAction();
 						timer = comboTimeout;
 					} else {
 						timer -= Time.deltaTime;
@@ -63,18 +65,88 @@ public class ControlBeardman : MonoBehaviour {
 			float h = Input.GetAxis("Horizontal");
 			AnimatorStateInfo asi = anim.GetCurrentAnimatorStateInfo(0);
 
-			if (h == 0 || asi.IsName("Base.Punch") || asi.IsName("Base.Kick")) {
-				anim.SetBool("Run", false);
-				rigidbody2D.velocity = new Vector2(0, 0);
-			} else {
-				anim.SetBool("Run", true);
-				rigidbody2D.velocity = new Vector2(Mathf.Sign(h) * maxSpeed, 0);
+			if (!asi.IsName("Base.Punch") && !asi.IsName("Base.Kick")) {
+				anim.SetFloat("Speed", Mathf.Abs(h));
+				rigidbody2D.velocity = new Vector2(h * maxSpeed, rigidbody2D.velocity.y);
 				
 				if (h > 0) {
 					transform.localScale = new Vector3(1, 1, 1);
-				} else {
+				} else if (h < 0) {
 					transform.localScale = new Vector3(-1, 1, 1);
 				}
+			}
+		}
+	}
+
+	private void checkAction() {
+		string result = null;
+
+		for (int i = 0; i < actions.Count; i += 1) {
+			switch((string) actions[i]) {
+				case "Fire1" :
+					switch (result) {
+						case null :
+							result = "Punch";
+							break;
+						case "Kick" :			
+							if (superKick  && GetComponent<Beardman>().hasEnergy(25)) {
+								result = "Super Kick";
+							} else {
+								performKick();
+								actions.RemoveAt(i - 1);
+								i -= 1;
+							}
+							break;
+						case "Punch" :
+							performPunch();
+							actions.RemoveAt(i - 1);
+							i -= 1;
+							break;
+						case "Super Kick" :
+							performSuperKick();
+							actions.RemoveAt(i - 1);
+							actions.RemoveAt(i - 2);
+							i -= 2;
+							break;
+						default :
+							break;
+					}
+					break;
+				case "Fire2" :
+					switch (result) {
+						case null :
+							result = "Kick";
+							break;
+						case "Punch" :
+							if (superPunch && GetComponent<Beardman>().hasEnergy(25)) {
+								result = "Super Punch";
+							} else {
+								performPunch();
+								actions.RemoveAt(i - 1);
+								i -= 1;
+							}
+							break;
+						case "Super Kick" :
+							if (ultraKick && GetComponent<Beardman>().hasEnergy(150)) {
+								result = "Ultra Kick";
+							} else {
+								performSuperKick();
+								actions.RemoveAt(i - 1);
+								actions.RemoveAt(i - 2);
+								i -= 2;
+							}
+							break;
+						case "Kick" :
+							performKick();
+							actions.RemoveAt(i - 1);
+							i -= 1;
+							break;
+						default :
+							break;
+					}
+					break;
+				default :
+					break;
 			}
 		}
 	}
@@ -91,7 +163,7 @@ public class ControlBeardman : MonoBehaviour {
 							result = "Punch";
 							break;
 						case "Kick" :
-							if (superKick) {
+							if (superKick && GetComponent<Beardman>().hasEnergy(25)) {
 								result = "Super Kick";
 							} else {
 								breakCombo = true;
@@ -108,14 +180,14 @@ public class ControlBeardman : MonoBehaviour {
 							result = "Kick";
 							break;
 						case "Punch" :
-							if (superPunch) {
+							if (superPunch && GetComponent<Beardman>().hasEnergy(25)) {
 								result = "Super Punch";
 							} else {
 								breakCombo = true;
 							}
 							break;
 						case "Super Kick" :
-							if (ultraKick) {
+							if (ultraKick && GetComponent<Beardman>().hasEnergy(150)) {
 								result = "Ultra Kick";
 							} else {
 								breakCombo = true;
@@ -138,33 +210,53 @@ public class ControlBeardman : MonoBehaviour {
 
 		switch (result) {
 			case "Punch" :
-				anim.SetTrigger("Punch");
-				attack.punch();
+				performPunch();
 				break;
 			case "Kick" :
-				anim.SetTrigger("Kick");
-				attack.kick();
+				performKick();
 				break;
 			case "Super Punch" :
-				if (GetComponent<Beardman>().useEnergy(25)) {
-					anim.SetTrigger("SuperPunch");
-					attack.superPunch();
-				}
+				performSuperPunch();
 				break;
 			case "Super Kick" :
-				if (GetComponent<Beardman>().useEnergy(25)) {
-					anim.SetTrigger("SuperKick");
-					attack.superKick();
-				}
+				performSuperKick();
 				break;
 			case "Ultra Kick" :
-				if (GetComponent<Beardman>().useEnergy(150)) {
-					anim.SetTrigger("UltraKick");
-					attack.ultraKick();
-				}
+				performUltraKick();
 				break;
 			default :
 				break;
+		}
+	}
+
+	private void performPunch() {
+		anim.SetTrigger("Punch");
+		attack.punch();
+	}
+
+	private void performKick() {
+		anim.SetTrigger("Kick");
+		attack.kick();
+	}
+
+	private void performSuperPunch() {
+		if (GetComponent<Beardman>().useEnergy(25)) {
+			anim.SetTrigger("SuperPunch");
+			attack.superPunch();
+		}
+	}
+
+	private void performSuperKick() {
+		if (GetComponent<Beardman>().useEnergy(25)) {
+			anim.SetTrigger("SuperKick");
+			attack.superKick();
+		}
+	}
+
+	private void performUltraKick() {
+		if (GetComponent<Beardman>().useEnergy(150)) {
+			anim.SetTrigger("UltraKick");
+			attack.ultraKick();
 		}
 	}
 

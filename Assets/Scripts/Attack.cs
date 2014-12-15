@@ -33,12 +33,20 @@ public class Attack : MonoBehaviour {
 
 	public void punch() {
 		if (punching.Count > 0) {
+			if ((GameObject) punching[0] == null) {
+				punching.RemoveAt(0);
+			}
+
 			((GameObject) punching[0]).GetComponent<Health>().hit(punchDamage, this);
 		}
 	}
 
 	public void kick() {
 		if (kicking.Count > 0) {
+			if ((GameObject) kicking[0] == null) {
+				kicking.RemoveAt(0);
+			}
+
 			((GameObject) kicking[0]).GetComponent<Health>().hit(kickDamage, this);
 		}
 	}
@@ -47,7 +55,9 @@ public class Attack : MonoBehaviour {
 		ArrayList killing = new ArrayList();
 
 		foreach (GameObject target in superPunching) {
-			killing.Add(target);
+			if (target) {
+				killing.Add(target);
+			}
 		}
 
 		foreach (GameObject target in killing) {
@@ -59,7 +69,9 @@ public class Attack : MonoBehaviour {
 		ArrayList killing = new ArrayList();
 
 		foreach (GameObject target in superKicking) {
-			killing.Add(target);
+			if (target) {
+				killing.Add(target);
+			}
 		}
 
 		foreach (GameObject target in killing) {
@@ -71,7 +83,9 @@ public class Attack : MonoBehaviour {
 		ArrayList killing = new ArrayList();
 
 		foreach (GameObject target in ultraKicking) {
-			killing.Add(target);
+			if (target) {
+				killing.Add(target);
+			}
 		}
 
 		foreach (GameObject target in killing) {

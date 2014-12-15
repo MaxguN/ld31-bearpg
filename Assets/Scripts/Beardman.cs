@@ -53,6 +53,10 @@ public class Beardman : MonoBehaviour {
 		return energyScript.useEnergy(en);
 	}
 
+	public bool hasEnergy(float en) {
+		return energyScript.hasEnergy(en);
+	}
+
 	public void upgradeHealth() {
 		healthScript.increaseHealth();
 		healthUpgrades += 1;
